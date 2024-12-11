@@ -60,7 +60,7 @@ resource "kubernetes_deployment" "nginx" {
           name  = "nginx"
           image = "nginx:1.17.10"
 
-          ports {
+          port {
             container_port = 80
           }
         }
@@ -87,4 +87,3 @@ resource "kubernetes_service" "nginx" {
     }
   }
 }
-
