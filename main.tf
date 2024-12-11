@@ -12,18 +12,11 @@ resource "google_container_cluster" "primary" {
 
   network    = var.network
   subnetwork = var.subnetwork
-
-  autoscaling {
-    enabled = true
-    min_node_count = 1
-    max_node_count = 5
-  }
 }
 
 resource "google_container_node_pool" "primary_nodes" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  node_count = 2
 
   node_config {
     machine_type = var.machine_type
@@ -88,9 +81,9 @@ resource "kubernetes_service" "nginx" {
 
     type = "LoadBalancer"
 
-    port {
+    ports = [{
       port        = 80
       target_port = 80
-    }
+    }]
   }
 }
