@@ -81,9 +81,10 @@ resource "kubernetes_service" "nginx" {
 
     type = "LoadBalancer"
 
-    ports = [{
+    port {
       port        = 80
       target_port = 80
-    }]
+    }
   }
 }
+
